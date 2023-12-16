@@ -59,13 +59,3 @@ print(response.json())
 #response = post_products_kits(data.product_ids)
 #print(response.status_code)
 #print(response.json())
-
-# def post_new_auth_kit(name, token):
-#    user_name = data.kit_body.copy()
-
-#    user_name ["name"] = name
-
-#    new_headers = data.headers.copy()
-
-#    new_headers ["Authorization"] = "Bearer " + token
-#    return requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH, json=user_name)

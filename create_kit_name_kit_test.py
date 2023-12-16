@@ -2,20 +2,20 @@ import sender_stand_request
 import data
 
 
-# эта функция меняет значения в параметре firstName
-def get_user_body(first_name):
+# эта функция меняет значения в параметре name
+def get_kit_body(name):
     # копирование словаря с телом запроса из файла data, чтобы не потерять данные в исходном словаре
-    current_body = data.user_body.copy()
-    # изменение значения в поле firstName
-    current_body["firstName"] = first_name
-    # возвращается новый словарь с нужным значением firstName
+    current_body = data.kit_body.copy()
+    # изменение значения в поле name
+    current_body["name"] = name
+    # возвращается новый словарь с нужным значением name
     return current_body
 
 
 # Функция для позитивной проверки
 def positive_assert(first_name):
     # В переменную user_body сохраняется обновленное тело запроса
-    user_body = get_user_body(first_name)
+    user_body = get_kit_body(name)
     # В переменную user_response сохраняется результат запроса на создание пользователя:
     user_response = sender_stand_request.post_new_user(user_body)
 
@@ -52,7 +52,7 @@ def test_create_user_15_letter_in_first_name_get_success_response():
 # Функция для негативной проверки
 def negative_assert_symbol(first_name):
     # В переменную user_body сохраняется обновлённое тело запроса
-    user_body = get_user_body(first_name)
+    user_body = get_kit_body(name)
 
     # В переменную response сохраняется результат запроса
     response = sender_stand_request.post_new_user(user_body)
