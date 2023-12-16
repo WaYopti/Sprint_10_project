@@ -14,3 +14,7 @@ user_body = {
 kit_body = {
        "name": "Мой набор"
 }
+
+product_ids = {
+    "ids": [1, 2, 3]
+}

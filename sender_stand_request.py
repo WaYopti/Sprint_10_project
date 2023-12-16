@@ -7,8 +7,8 @@ import data
 #    return requests.get(configuration.URL_SERVICE + configuration.DOC_PATH)
 
 
-#response = get_docs()
-#print(response.status_code)
+# response = get_docs()
+# print(response.status_code)
 
 
 # def get_logs():
@@ -16,8 +16,8 @@ import data
 #                        params={"count": 20})
 
 
-#response = get_logs()
-#print(response.status_code)
+# response = get_logs()
+# print(response.status_code)
 
 
 def get_users_table():
@@ -42,11 +42,30 @@ print(response.status_code)
 print(response.json())
 
 
-def post_products_kits(products_ids):
-    return requests.post(configuration.URL_SERVICE + configuration.PRODUCTS_KITS_PATH, json=products_ids,
-                         headers=data.headers)
+def new_kit_for_created_user(kit_body):
+    return requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH, json=kit_body, headers=data.headers)
 
 
-response = post_products_kits(data.kit_body)
+response = new_kit_for_created_user(data.kit_body)
 print(response.status_code)
 print(response.json())
+
+
+#def post_products_kits(products_ids):
+#    return requests.post(configuration.URL_SERVICE + configuration.PRODUCTS_KITS_PATH, json=products_ids,
+#                         headers=data.headers)
+
+
+#response = post_products_kits(data.product_ids)
+#print(response.status_code)
+#print(response.json())
+
+# def post_new_auth_kit(name, token):
+#    user_name = data.kit_body.copy()
+
+#    user_name ["name"] = name
+
+#    new_headers = data.headers.copy()
+
+#    new_headers ["Authorization"] = "Bearer " + token
+#    return requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH, json=user_name)
