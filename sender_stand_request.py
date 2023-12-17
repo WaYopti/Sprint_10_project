@@ -1,61 +1,39 @@
-import configuration
 import requests
+import configuration
 import data
 
 
-# def get_docs():
-#    return requests.get(configuration.URL_SERVICE + configuration.DOC_PATH)
-
-
-# response = get_docs()
-# print(response.status_code)
-
-
-# def get_logs():
-#    return requests.get(configuration.URL_SERVICE + configuration.LOG_MAIN_PATH, \
-#                        params={"count": 20})
-
-
-# response = get_logs()
-# print(response.status_code)
-
-
-def get_users_table():
-    return requests.get(configuration.URL_SERVICE + configuration.USERS_TABLE_PATH)
-
-
-response = get_users_table()
-print(response.status_code)
-print(response.headers)  # в функциях get_docs и в get_logs нужно по заданию
-
-
-# POST-запросы
 # функция на создание пользователя
-def post_new_user(body):
-    return requests.post(configuration.URL_SERVICE + configuration.CREATE_USER_PATH,  # подставляем полный url
-                         json=body,  # тут тело
-                         headers=data.headers)  # а здесь заголовки
+def post_new_user():
+    url = configuration.URL_SERVICE + configuration.CREATE_USER_PATH  # подставляем полный url до ендпоинта
+    return requests.post(url, json=data.user_body, headers=data.headers)  # передаем тело и заголовки для создания user
 
 
-response = post_new_user(data.user_body)
+response = post_new_user()
 print(response.status_code)
 print(response.json())
 
 
-def new_kit_for_created_user(kit_body):
-    return requests.post(configuration.URL_SERVICE + configuration.CREATE_KIT_PATH, json=kit_body, headers=data.headers)
+# создание нового набора для созданного ранее пользователя
+def post_new_kit_for_created_user(token, kit_body):
+    url = configuration.URL_SERVICE + configuration.CREATE_KIT_PATH
+    body = {
+        "name": kit_body
+    }
+    new_headers = data.headers.copy()
+    new_headers['Authorization'] = f'Bearer {token}'
+    return requests.post(url, json=body, headers=new_headers)
 
 
-response = new_kit_for_created_user(data.kit_body)
+response = post_new_kit_for_created_user('token', 'kit_body')
 print(response.status_code)
 print(response.json())
 
-
-#def post_products_kits(products_ids):
+# def post_products_kits(products_ids):
 #    return requests.post(configuration.URL_SERVICE + configuration.PRODUCTS_KITS_PATH, json=products_ids,
 #                         headers=data.headers)
 
 
-#response = post_products_kits(data.product_ids)
-#print(response.status_code)
-#print(response.json())
+# response = post_products_kits(data.product_ids)
+# print(response.status_code)
+# print(response.json())

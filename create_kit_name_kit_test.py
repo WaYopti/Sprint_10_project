@@ -15,7 +15,7 @@ def get_kit_body(name):
 # Функция для позитивной проверки
 def positive_assert(first_name):
     # В переменную user_body сохраняется обновленное тело запроса
-    user_body = get_kit_body(name)
+    user_body = get_user_body(first_name)
     # В переменную user_response сохраняется результат запроса на создание пользователя:
     user_response = sender_stand_request.post_new_user(user_body)
 
@@ -52,7 +52,7 @@ def test_create_user_15_letter_in_first_name_get_success_response():
 # Функция для негативной проверки
 def negative_assert_symbol(first_name):
     # В переменную user_body сохраняется обновлённое тело запроса
-    user_body = get_kit_body(name)
+    user_body = get_user_body(first_name)
 
     # В переменную response сохраняется результат запроса
     response = sender_stand_request.post_new_user(user_body)
