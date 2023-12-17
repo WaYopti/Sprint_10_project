@@ -1,5 +1,14 @@
 import sender_stand_request
-import data
+
+
+def get_token():
+    sender_stand_request.post_new_user()
+    response = sender_stand_request.post_new_user()
+    # response = sender_stand_request.post_new_kit_for_created_user()
+    if response.ok:
+        return response.json()['token']
+    else:
+        return ''
 
 
 # эта функция меняет значения в параметре name
@@ -10,6 +19,14 @@ def get_kit_body(name):
     current_body["name"] = name
     # возвращается новый словарь с нужным значением name
     return current_body
+
+
+def test_kits_name_1():
+    token = get_token()
+    kit_name = 'a'
+    response = sender_stand_request.post_new_kit_for_created_user(token, kit_name)
+    assert response.status_code == 201
+    assert response.json()['name'] == kit_name
 
 
 # Функция для позитивной проверки
